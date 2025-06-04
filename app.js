@@ -25,7 +25,7 @@ app.use(cors({
 
 app.use("/api/v1/home", homeRoutes); // no Auth routes 
 app.use("/api/v1/user", userRoutes); // user creation and login/logout
-app.use("/api/v1/blog", authRoutes); // For routes where users interact with their posts
+app.use("/api/v1/blog", authRoutes); // For routes where users interact with their posts or admins
 
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);

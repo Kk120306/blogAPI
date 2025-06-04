@@ -75,18 +75,8 @@ async function deletePost(req, res) {
         const postId = parseInt(req.params.id);
         const userId = parseInt(req.user.id);
 
-        const existingPost = await prisma.post.findUnique({
-            where: { id: postId },
-        });
-
-        if (!existingPost || existingPost.authorId !== userId) {
-            return res.status(403).json({
-                error: "You are not authorized to delete this post.",
-            });
-        }
-
         await prisma.post.delete({
-            where: { id: postId },
+            where: { id: postId, authorId: userId },
         });
 
         res.json({
