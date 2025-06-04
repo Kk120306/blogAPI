@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 
 const homeRoutes = require("./routes/HomeRoutes");
 const userRoutes = require("./routes/UserRoutes");
+const authRoutes = require("./routes/AuthRoutes");
 
 require('dotenv').config();
 
@@ -22,8 +23,9 @@ app.use(cors({
   }));
 
 
-app.use("/api/v1/home", homeRoutes);
-app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/home", homeRoutes); // no Auth routes 
+app.use("/api/v1/user", userRoutes); // user creation and login/logout
+app.use("/api/v1/blog", authRoutes); // For routes where users interact with their posts
 
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
