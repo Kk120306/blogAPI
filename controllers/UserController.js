@@ -43,7 +43,7 @@ async function signIn(req, res) {
         }
 
         const token = jwt.sign(
-            { id: user.id, name: user.name },
+            { id: user.id, name: user.name, role: user.role },
             process.env.JWT_SECRET,
             { expiresIn: "6h" }
         );
