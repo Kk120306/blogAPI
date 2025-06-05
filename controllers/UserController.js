@@ -71,8 +71,27 @@ function signOut(req, res) {
     res.json({ message: "Logged out" });
 };
 
+function getData(req, res) {
+    jwt.verify(
+        req.cookies.token,
+        process.env.JWT_SECRET,
+        (err, authorizedData) => {
+            if (err) {
+                res.status(403).json({
+                    error: "Could not connect to the protected route",
+                });
+            } else {
+                res.json({
+                    authorizedData,
+                });
+            }
+        }
+    );
+}
+
 module.exports = {
     signUp,
     signIn,
-    signOut
+    signOut,
+    getData
 }
