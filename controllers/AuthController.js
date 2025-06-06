@@ -42,7 +42,7 @@ async function createPost(req, res) {
             }
         })
 
-        res.status(201).json({ message: "User created!" })
+        res.status(201).json({ post: newPost })
     } catch (err) {
         console.error("Something went wrong: ", err);
         res.status(500).json({ error: "Could not create post." });
