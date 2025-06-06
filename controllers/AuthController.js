@@ -37,7 +37,8 @@ async function createPost(req, res) {
                 title,
                 content,
                 authorId: id,
-                published
+                published,
+                comments : []
             }
         })
 
