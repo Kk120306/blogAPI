@@ -47,6 +47,7 @@ async function signIn(req, res) {
             process.env.JWT_SECRET,
             { expiresIn: "6h" }
         );
+        console.log(user.role);
 
         res.cookie("token", token, {
             httpOnly: true,

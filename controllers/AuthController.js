@@ -1,7 +1,7 @@
 const prisma = require("../config/prismaConfig");
 
 async function getUserPosts(req, res) {
-    const id = parseInt(req.user.id);
+    const id = req.user.id;
     try {
         const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
 
@@ -24,7 +24,7 @@ async function getUserPosts(req, res) {
 }
 
 async function createPost(req, res) {
-    const id = parseInt(req.user.id);
+    const id = req.user.id;
     const { title, content, published } = req.body;
 
     if (!title || !content) {
@@ -32,13 +32,12 @@ async function createPost(req, res) {
     }
 
     try {
-        await prisma.post.create({
+        const newPost = await prisma.post.create({
             data: {
                 title,
                 content,
                 authorId: id,
                 published,
-                comments : []
             }
         })
 
@@ -50,13 +49,12 @@ async function createPost(req, res) {
 }
 
 async function editPost(req, res) {
-    const authorId = parseInt(req.user.id);
     const id = req.params.id;
     const { title, content, published } = req.body;
 
     try {
         const updatedPost = await prisma.post.update({
-            where: { id, authorId },
+            where: { id },
             data: {
                 ...(title && { title }),
                 ...(content && { content }),
@@ -73,11 +71,10 @@ async function editPost(req, res) {
 
 async function deletePost(req, res) {
     try {
-        const postId = parseInt(req.params.id);
-        const userId = parseInt(req.user.id);
+        const postId = req.params.id;
 
         await prisma.post.delete({
-            where: { id: postId, authorId: userId },
+            where: { id: postId },
         });
 
         res.json({

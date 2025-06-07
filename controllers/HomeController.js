@@ -24,14 +24,16 @@ async function getBlogById(req, res) {
         const id = req.params.id
         const post = await prisma.post.findUnique({
             where: { id },
-            author: {
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                },
+            include: {
+                author: {
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                    }
+                }
             }
-        })
+        });
 
         res.json({ post });
     } catch (err) {
