@@ -7,7 +7,10 @@ A RESTful API backend for a blogging platform, designed to work seamlessly with 
 
 ## Features
 
-* **User Authentication**: Register and login functionalities with secure password handling.
+ **User Authentication**:
+- Register and login functionality
+- Uses JWT (JSON Web Tokens) for secure user authentication
+- Authentication tokens are managed via HTTP-only cookies to enhance security
 * **Blog Management**: Create, read, update, and delete blog posts.
 * **Middleware**: Incorporates middleware for request validation and error handling.
 * **Database Integration**: Employs Prisma ORM for database interactions.
